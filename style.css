@@ -1,0 +1,13 @@
+.modal {
+  display: block;
+  z-index: -1;
+}
+
+.modal.fade.in {
+  z-index: 1050;
+}
+
+@media print
+{
+.noprint {display:none;}
+}
