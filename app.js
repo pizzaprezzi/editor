@@ -36,13 +36,24 @@ var json= angular.toJson($scope.entity, true);
 var blob = new Blob([json], {type: "application/json"});
 var url  = URL.createObjectURL(blob);
 
-var a = document.createElement('a');
+var a =document.getElementById('getJson');
 a.download    = "locale.json";
 a.href        = url;
-a.textContent = "Json Pronto per download";
+a.style.visibility="visible";
 
-document.getElementById('getJson').appendChild(a);
+//var a = document.createElement('a');
+//a.download    = "locale.json";
+//a.href        = url;
+//a.textContent = "Scarica";
+//a.className="btn btn-success";
+//document.getElementById('getJson').appendChild(a);
 }
+
+$scope.hideJson=function () {
+var a =document.getElementById('getJson');
+a.style.visibility="hidden";	
+}
+
 	
  $scope.addItem = function (item,pr) {
 

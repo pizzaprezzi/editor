@@ -48,9 +48,16 @@
 	</div>
 </nav>
 <!-- fine menu -->
-<div class="page-header" style="margin-top: 5px;margin-bottom: 5px;">
-<button class="btn btn-success" ng-click="getJson()">Prepara Json</button>
-<div id="getJson"></div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Esporta dati</div>
+  <div class="panel-body">
+	<button class="btn btn-info" ng-click="getJson()">Prepara Archivio</button>
+	<a href="" class="btn btn-success" role="button" id="getJson" style="visibility:hidden" ng-click="hideJson()">Scarica</a>
+	<!--<span id="getJson"></span>-->
+  </div>
+</div>
 <div class="panel panel-default">
   <div class="panel-heading"><strong>Dati Locale</strong></div>
   <div class="panel-body">
@@ -77,46 +84,46 @@
   </div>
 </div>
 
-<div class="page-header" style="margin-top: 5px;margin-bottom: 5px;">
 
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>Telefono </strong></div>
-  <div class="panel-body">
-	<div class="form-group" ng-repeat="c in entity.Contact">
-	  <label for="Contact{{$index}}">Telefono {{$index+1}}:</label>
-	  <input type="text" class="form-control" id="Contact{{$index}}" ng-model="c.Value">
-	  <button class="btn btn-success" ng-click="removeContact($index)">Rimuovi</button>
+	<div class="panel-heading"><strong>Telefono </strong></div>
+	<div class="panel-body">
+		<div class="form-group" ng-repeat="c in entity.Contact">
+			<label for="Contact{{$index}}">Telefono {{$index+1}}:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" id="Contact{{$index}}" ng-model="c.Value">
+				<span class="input-group-btn">
+					<button class="btn btn-danger" ng-click="removeContact($index)">Rimuovi</button>
+				</span>
+			</div>	  
+		</div>
+		<button class="btn btn-success" ng-click="addContact()">Aggiungi</button>		
 	</div>
-	<button class="btn btn-success" ng-click="addContact()">Aggiungi</button>		
-  </div>
 </div>
 
 
-
-	<h2>{{ entity.Name }}</h2>
-	
-	<p>{{ entity.Address }}</p>
-
-	<div class="list-group">
-	  <a href="tel:{{ c.Value }}" ng-repeat="c in entity.Contact" class="list-group-item"><h5><i class="fa fa-phone" aria-hidden="true"></i> Chiama {{ c.Value }}</h4></a>
-	</div>	
-	<div class="list-group noprint" >
-	  <a href="{{ entity.Website }}" class="list-group-item"><h5><i class="fa fa-external-link" aria-hidden="true"></i> Sito Web</h4></a>
-	  <a href="https://maps.google.it/maps?q={{entity.Latitude}},{{entity.Longitude}}" class="list-group-item"><h5><i class="fa fa-map-o" aria-hidden="true"></i> Mappa</h4></a>
-	</div>	
-
-	<button type="button" class="btn btn-info noprint" data-toggle="modal" data-target="#myMenu">Visualizza Depliant</button>
-</div>
-</div>
 <div class="container">
 <ul class="nav nav-tabs noprint">
-	<li ng-repeat="c in entity.Categories" ng-class="{'active':c.Alias === entity.Categories[0].Alias}"><a data-toggle="tab" href="#{{ c.Alias }}">{{ c.Name }}</a></li>
-	<li><a data-toggle="tab" href="#cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Preventivo {{ getTotal()|currency }}</a></li>
+	<li ng-repeat="c in entity.Categories" ng-class="{'active':c.Alias === entity.Categories[0].Alias}"><a data-toggle="tab" href="#{{ c.Alias }}">{{ c.Name }}</a>
 </ul>
 
 <div class="tab-content">
 	<div id="{{ c.Alias }}" class="tab-pane fade"  ng-repeat="c in entity.Categories" ng-class="{'in active':c.Alias === entity.Categories[0].Alias}">
-		<h3>{{ c.Name }}</h3>
+	<br />
+	<div class="panel panel-default">
+	  <div class="panel-heading">Dati Categoria</div>
+	  <div class="panel-body">
+		<div class="form-group">
+			<label for="Name">Categoria:</label>
+			<input type="text" class="form-control" id="Website" ng-model="c.Name">
+		</div>
+		<div class="form-group">
+			<label for="Name">Alias:</label>
+			<input type="text" class="form-control" id="Website" ng-model="c.Alias">
+		</div>
+
+		</div>
+	</div>	
 		<table class="table table-bordered table-responsive">
 			<thead>
 				<tr>
@@ -132,73 +139,8 @@
 			</tbody>    
 		</table>
 	</div>
-	<div id="cart" class="tab-pane fade">
-		<h3>Preventivo</h3>
-		<table class="table table-bordered table-responsive">
-			<thead>
-				<tr>
-					<th class="noprint"></th>
-					<th>Nome</th>
-					<th>Prezzo</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="c in cart  | orderBy:'Name'">
-					<td class="noprint"><button class="btn btn-danger" ng-click="removeItem(c)"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button></td>
-					<td>{{ c.Name }}</td>
-					<td align="right">{{ c.Price | currency  }}</td>
-				</tr>
-			</tbody>    
-			<thead>
-				<tr>
-					<th class="noprint"></th>
-					<th>Totale</th>
-					<td align="right"><b>{{ getTotal()| currency }}</b></td>
-				</tr>
-			</thead>			
-		</table>
-		<a class="btn btn-success noprint pull-right" href="javascript:window.print()">Stampa preventivo</a> <br />
-	</div>	
 </div>
 </div>
-<div id="myMenu" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Depliant</h4>
-      </div>
-      <div class="modal-body">
-      	
-<div class="carousel" id="slider">
-    <div class="carousel-inner">
-        <div class="item" ng-class="{active:!$index}" ng-repeat="photo in entity.GalleryMenu">
-            <img src="{{ photo.Link }}" class="img-responsive center-block">
-        </div>
-    </div>
-
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#slider" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Indietro</span>
-  </a>
-  <a class="right carousel-control" href="#slider" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Avanti</span>
-  </a>
-</div>
-
-</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 
 </body>
 
