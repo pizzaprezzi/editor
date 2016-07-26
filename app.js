@@ -8,33 +8,66 @@ function MyController($scope, $http) {
   $scope.pageSize = 20;
   $scope.cart = [];
  
- $scope.getTotal = function(){
-    var total = 0;
-    for(var i = 0; i < $scope.cart.length; i++){
-        var product = $scope.cart[i];
-        total += (product.Price);
-    }
-    return total;
-}
+//Contatti
 
 $scope.addContact=function () {
-
-        $scope.entity.Contact.push({
-            Value: ''
-        });
-    };
-
+	$scope.entity.Contact.push({Value: ''});
+}
+	
+$scope.removeContact = function(index) {
+	if (confirm('Corfema eliminazione?')) {
+		$scope.entity.Contact.splice(index, 1);     
+	} 	 
+}
+//Categorie
 $scope.addCat=function () {
-
 	$scope.entity.Categories.push({Name: 'Nuova categoria',Alias: 'new',Prices: [{Value: 'Prezzo'}],Entities: []});
 };
-	
-$scope.removeContact = function(index) { 
-  $scope.entity.Contact.splice(index, 1);     
+$scope.removeCat = function(index) {
+	if (confirm('Corfema eliminazione?')) {
+		$scope.entity.Categories.splice(index, 1);     
+	} 	 
+}
+//Tariffe
+$scope.addTr=function (pr) {
+	pr.push({Value: 'Prezzo'});
+};
+$scope.removeTr = function(pr,index) {
+	if (confirm('Corfema eliminazione?')) {
+		pr.splice(index, 1);     
+	} 	 
+}
+
+//Entities
+$scope.addEt=function (et) {
+	et.push({ "Name": "Prodotto", "Items": [], "Prices": [ { "Value": 0 } ]});
+};
+$scope.removeEt = function(et,index) {
+	if (confirm('Corfema eliminazione?')) {
+		et.splice(index, 1);     
+	} 	 
+}
+//Items
+$scope.addIt=function (it) {
+	it.push({Value: ''});
+};
+$scope.removeIt = function(it,index) {
+	if (confirm('Corfema eliminazione?')) {
+		it.splice(index, 1);     
+	} 	 
+}
+
+//Prices
+$scope.addPr=function (pr) {
+	pr.push({Value: '0'});
+};
+$scope.removePr = function(pr,index) {
+	if (confirm('Corfema eliminazione?')) {
+		pr.splice(index, 1);     
+	} 	 
 }	
-	
 
-
+//Esporta dati
 $scope.getJson=function () {
 //var json = JSON.stringify($scope.entity);
 var json= angular.toJson($scope.entity, true);
@@ -45,13 +78,6 @@ var a =document.getElementById('getJson');
 a.download    = "locale.json";
 a.href        = url;
 a.style.visibility="visible";
-
-//var a = document.createElement('a');
-//a.download    = "locale.json";
-//a.href        = url;
-//a.textContent = "Scarica";
-//a.className="btn btn-success";
-//document.getElementById('getJson').appendChild(a);
 }
 
 $scope.hideJson=function () {
@@ -60,19 +86,7 @@ a.style.visibility="hidden";
 }
 
 	
- $scope.addItem = function (item,pr) {
-
-        $scope.cart.push({
-            Name: item.Name,
-            Price:pr.Value
-        });
-    };
-
-$scope.removeItem = function(item) { 
-  var index = $scope.cart.indexOf(item);
-  $scope.cart.splice(index, 1);     
-}
-
+ //Carica dati
  $http.get("https://raw.githubusercontent.com/pizzaprezzi/tuonome/gh-pages/entity.json")
     .then(function(response) {
         $scope.entity = response.data;
@@ -89,9 +103,6 @@ function OtherController($scope) {
   
   };
 }
-
-
-
 
 myApp.controller('MyController', MyController);
 myApp.controller('OtherController', OtherController);
