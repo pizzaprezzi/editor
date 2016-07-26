@@ -277,34 +277,6 @@
           ]
         },
         {
-          "Name": "Calzonissimo",
-          "Items": [
-            {
-              "Value": "Pomodoro"
-            },
-            {
-              "Value": "Mozzarella"
-            },
-            {
-              "Value": "Prosciutto"
-            },
-            {
-              "Value": "Funghi"
-            },
-            {
-              "Value": "Carciofi"
-            },
-            {
-              "Value": "Salame"
-            }
-          ],
-          "Prices": [
-            {
-              "Value": 12.0
-            }
-          ]
-        },
-        {
           "Name": "Capricciosa",
           "Items": [
             {
