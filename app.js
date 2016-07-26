@@ -24,6 +24,11 @@ $scope.addContact=function () {
         });
     };
 
+$scope.addCat=function () {
+
+	$scope.entity.Categories.push({Name: 'Nuova categoria',Alias: 'new',Prices: [{Value: 'Prezzo'}],Entities: []});
+};
+	
 $scope.removeContact = function(index) { 
   $scope.entity.Contact.splice(index, 1);     
 }	
