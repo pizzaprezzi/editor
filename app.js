@@ -87,7 +87,7 @@ a.style.visibility="hidden";
 
 	
  //Carica dati
- $http.get("https://raw.githubusercontent.com/pizzaprezzi/tuonome/gh-pages/entity.json")
+ $http.get("https://www.pizzaprezzi.it/editor/entity.json")
     .then(function(response) {
         $scope.entity = response.data;
     });
