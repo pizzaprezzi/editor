@@ -75,7 +75,7 @@ var blob = new Blob([json], {type: "application/json"});
 var url  = URL.createObjectURL(blob);
 
 var a =document.getElementById('getJson');
-a.download    = "locale.json";
+a.download    = $scope.entity.Alias + ".json";
 a.href        = url;
 a.style.visibility="visible";
 }
