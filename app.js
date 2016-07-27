@@ -87,7 +87,7 @@ a.style.visibility="hidden";
 
 	
  //Carica dati
- $http.get("https://www.pizzaprezzi.it/editor/entity.json")
+ $http.get("entity.json")
     .then(function(response) {
         $scope.entity = response.data;
     });
