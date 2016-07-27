@@ -53,6 +53,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">Esporta dati</div>
   <div class="panel-body">
+	<input type='file' accept='.json' onchange='angular.element(this).scope().uploadedFile(this)' id="file" class="inputfile"><label for="file" class="btn btn-default">Apri configurazione esistente</label>
 	<button class="btn btn-info" ng-click="getJson()">Prepara Archivio</button>
 	<a href="" class="btn btn-success" role="button" id="getJson" style="visibility:hidden" ng-click="hideJson()">Scarica</a>
 	<!--<span id="getJson"></span>-->

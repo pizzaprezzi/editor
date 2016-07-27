@@ -92,6 +92,20 @@ a.style.visibility="hidden";
         $scope.entity = response.data;
     });
 	
+$scope.uploadedFile = function(element) {
+ $scope.$apply(function($scope) {
+ $scope.files = element.files; 
+ var reader = new FileReader();
+    reader.onload = function(){
+      var text = $scope.files;
+      //console.log(reader.result);
+	  $scope.entity=JSON.parse(reader.result);
+	  $scope.$apply();
+    };
+	reader.readAsText($scope.files[0]);
+ });
+}
+
 	
   $scope.pageChangeHandler = function(num) {
       
@@ -103,6 +117,17 @@ function OtherController($scope) {
   
   };
 }
+
+  var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+      console.log(reader.result);
+    };
+    reader.readAsText(input.files[0]);
+  };
 
 myApp.controller('MyController', MyController);
 myApp.controller('OtherController', OtherController);
